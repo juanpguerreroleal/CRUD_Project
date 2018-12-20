@@ -1,0 +1,62 @@
+﻿@page
+@model CRUD_Project.Pages.Books.IndexModel
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<h2>Lista de Libros</h2>
+</hr>
+<br />
+
+<form method="post">
+    @if (Model.Message != null)
+    {
+        <div class="alert alert-info alert-dismissable" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            @Model.Message
+        </div>
+    }
+
+    <a asp-page="Add" class="btn btn-primary">Crear nuevo libro</a>
+    <br />
+    @if (Model.Books.Count() == 0)
+    {
+        <div class="text-center">
+            <h3>No hay libros en la base de datos</h3>
+        </div>
+    }
+    else
+    {
+        <div class="text-center">
+            <table class="table">
+                <tr>
+                    <th>
+                        <h3>@Html.DisplayNameFor(m => m.Books.FirstOrDefault().Name)</h3>
+                    </th>
+                    <th>
+                        <h3>@Html.DisplayNameFor(m => m.Books.FirstOrDefault().Description)</h3>
+                    </th>
+                </tr>
+                @foreach (var item in Model.Books)
+                {
+                    <tr>
+                        <td>
+                            <h4>@Html.DisplayFor(m => item.Name)</h4>
+                        </td>
+                        <td>
+                            <h4>@Html.DisplayFor(m => item.Description)</h4>
+                        </td>
+                        <td>
+                            <button asp-page-handler="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Eliminar</button>
+                        </td>
+                        <td>
+                            <a asp-page="Edit" asp-route-id="@item.Id" class="btn btn-default btn-sm">Editar</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+</form>

@@ -1,0 +1,47 @@
+﻿@page
+@model CRUD_Project.Pages.Books.AddModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<br />
+<h2>Agregar un nuevo libro</h2>
+<br />
+<hr />
+
+<div class="row">
+    <form method="post">
+        <div class="row">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label asp-for="book.Name"></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input asp-for="book.Name" class="form-control" />
+                    </div>
+                </div>
+                <span asp-validation-for="book.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-1">
+                        <label asp-for="book.Description"></label>
+                    </div>
+                    <div class="col-md-4">
+                        <input asp-for="book.Description" class="form-control" />
+                    </div>
+                </div>
+                <span asp-validation-for="book.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Agregar" class="btn btn-primary btn-sm" />
+                <a asp-page="Index" class="btn btn-success btn-sm">Volver a la lista</a>
+            </div>
+        </div>
+    </form>
+</div>
+@section  Scripts{ 
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
